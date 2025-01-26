@@ -4,13 +4,8 @@
 #include <iostream>
 /*#include <string>
 #include <vector>
-
-#include "Token.hpp"
-#include "Lexer.hpp"
-#include "ParsingNode.hpp"
-#include "Parser.hpp"
-#include "Position.hpp"
-#include "Interpereter.hpp"
-#include "Number.hpp"
 */
+#include "TableEntry.hpp"
+#include "Table.hpp"
+
 #endif
