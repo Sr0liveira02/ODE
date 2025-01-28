@@ -6,11 +6,16 @@
 class Table {
     public:
     Table(char * path);
-    char getChar(int charNumber);
+    char getChar();
+    void cursorUp();
+    void cursorDown();
+    void cursorLeft();
+    void cursorRight();
 
     private:
     // TODO add a line
-    int _char;
+    int _fileSize;
+    int _cursor;
     TableEntry** _contents;
     
 };
