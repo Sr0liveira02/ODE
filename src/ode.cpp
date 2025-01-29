@@ -8,13 +8,12 @@ int main(int argc, char* argv[]) {
     }
 
     Table* table = new Table(argv[1]);
+    table->cursorLeft(1);
+    table->cursorRight(3);
     table->cursorDown();
+    table->cursorUp();
+    table->cursorRight(3);
     table->cursorDown();
-    table->cursorRight();
-    table->cursorRight();
-    table->cursorRight();
-    table->cursorUp();
-    table->cursorUp();
     std::cout << "Char = " << table->getChar() << "\n";
 
     return 0;

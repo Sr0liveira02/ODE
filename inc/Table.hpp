@@ -6,17 +6,24 @@
 class Table {
     public:
     Table(char * path);
+
     char getChar();
     void cursorUp();
     void cursorDown();
-    void cursorLeft();
-    void cursorRight();
+    void cursorLeft(int number);
+    void cursorRight(int number);
+    void cursorRightInLine(int collumn);
 
     private:
     // TODO add a line
+    // cursor be in the \n to indicate that it is the start of the line or just abstract
     int _fileSize;
     int _cursor;
     TableEntry** _contents;
+
+    int getLineStart();
+    int getNextLine();
+    int getLineBefore();
     
 };
 
