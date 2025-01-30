@@ -9,12 +9,14 @@ int main(int argc, char* argv[]) {
 
     Table* table = new Table(argv[1]);
     table->cursorLeft(1);
-    table->cursorRight(3);
     table->cursorDown();
-    table->cursorUp();
-    table->cursorRight(3);
     table->cursorDown();
-    std::cout << "Char = " << table->getChar() << "\n";
+    char a = table->getChar();
+    if (a == '\n')
+        a = 'N';
+    if (a == '\0')
+        a = 'M';
+    std::cout << "Char = " << a << "\n";
 
     return 0;
 }

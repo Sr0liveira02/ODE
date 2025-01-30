@@ -16,7 +16,6 @@ class Table {
 
     private:
     // TODO add a line
-    // cursor be in the \n to indicate that it is the start of the line or just abstract
     int _fileSize;
     int _cursor;
     TableEntry** _contents;

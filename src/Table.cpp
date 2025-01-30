@@ -62,6 +62,7 @@ void Table::cursorDown() {
     int collumn = _cursor - getLineStart();
     int nextLine = getNextLine();
     if (nextLine == -1) {
+        _cursor = _fileSize;
         return;
     }
     _cursor = nextLine;
@@ -93,9 +94,6 @@ void Table::cursorRight(int number) {
     } else {
         _cursor = _fileSize - 2; // maybe on file size
     }
-    if (getChar() == '\n') {
-        _cursor++;
-    }
 }
 
 void Table::cursorRightInLine(int collumn) {
@@ -106,7 +104,6 @@ void Table::cursorRightInLine(int collumn) {
     for (int j = 0; j < collumn; j++) {
         _cursor++;
         if (getChar() == '\n' || getChar() == '\0') {
-            _cursor--;
             return;
         }
     }
@@ -119,6 +116,7 @@ int Table::getLineStart() {
     */
     int temp = _cursor;
     int ret;
+    _cursor--;
     while (getChar() != '\n') {
         if (_cursor == -1) {
             break;
