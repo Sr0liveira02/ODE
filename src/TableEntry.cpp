@@ -12,7 +12,7 @@ char TableEntry::getChar(int charNumber) {
             Receives: (int charNumber) Number of the position the char you wish has
             Return: (char) The char in question
     */
-    return _content[charNumber];
+    return _content[charNumber - _charNumber];
 }
 
 int TableEntry::getStartingNumber() {
