@@ -8,15 +8,10 @@ int main(int argc, char* argv[]) {
     }
 
     Table* table = new Table(argv[1]);
-    table->cursorLeft(1);
-    table->cursorDown();
-    table->cursorDown();
-    char a = table->getChar();
-    if (a == '\n')
-        a = 'N';
-    if (a == '\0')
-        a = 'M';
-    std::cout << "Char = " << a << "\n";
+    table->cursorRight(5);
+    table->backSpace();
+    table->backSpace(); 
+    table->print();
 
     return 0;
 }

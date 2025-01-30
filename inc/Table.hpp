@@ -2,6 +2,7 @@
 #define TABLE_HPP
 
 #include "TableEntry.hpp"
+#include <vector>
 
 class Table {
     public:
@@ -13,16 +14,20 @@ class Table {
     void cursorLeft(int number);
     void cursorRight(int number);
     void cursorRightInLine(int collumn);
+    void backSpace();
+    void print();
 
     private:
     // TODO add a line
     int _fileSize;
     int _cursor;
-    TableEntry** _contents;
+    std::vector<TableEntry*> _contents;
 
     int getLineStart();
     int getNextLine();
     int getLineBefore();
+
+    int getTableEntry();
     
 };
 
