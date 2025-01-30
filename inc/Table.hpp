@@ -15,6 +15,7 @@ class Table {
     void cursorRight(int number);
     void cursorRightInLine(int collumn);
     void backSpace();
+    void deleteChar();
     void print();
 
     private:
@@ -27,7 +28,8 @@ class Table {
     int getNextLine();
     int getLineBefore();
 
-    int getTableEntry();
+    int getTableEntry(bool equal);
+    
     
 };
 

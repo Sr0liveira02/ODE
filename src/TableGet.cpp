@@ -57,7 +57,7 @@ int Table::getLineBefore() {
     return ret;
 }
 
-int Table::getTableEntry() {
+int Table::getTableEntry(bool equal) {
     /*  Loops throw the Table entries trying to find wich one contains the _cursor
             Receives:
             Return: (TableEntry* ret) The Table entry that contains the character in teh Cursor
@@ -65,8 +65,13 @@ int Table::getTableEntry() {
     int ret = -1;
     for (int i = _contents.size() - 1; i >= 0; i--) {
         TableEntry* temp = _contents[i];
-        if (temp->getStartingNumber() < _cursor) {
-            ret = i;
+        if (temp->getStartingNumber() <= _cursor) {
+            // if u dont want the < to be equal it will return the one before this
+            if (_cursor == temp->getStartingNumber() && !equal) {
+                ret = i - 1;
+            } else {
+                ret = i;
+            }
             return ret;
         }
     }
@@ -78,5 +83,5 @@ char Table::getChar() {
             Receives:
             Return: (char) The char in _cursor
     */
-    return _contents[getTableEntry()]->getChar(_cursor);
+    return _contents[getTableEntry(true)]->getChar(_cursor);
 }

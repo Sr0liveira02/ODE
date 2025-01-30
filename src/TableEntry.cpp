@@ -5,6 +5,7 @@ TableEntry::TableEntry(char* content, int charNumber, int size) {
     _charNumber = charNumber;
     _mallocSize = size;
     _size = size;
+    _mallocOffset = 0;
 }
 
 char TableEntry::getChar(int charNumber) {
@@ -45,7 +46,26 @@ char* TableEntry::backSpace(int cursor) {
         _content[cursor - _charNumber - 1] = '\0';
         _size = cursor - 1 - _charNumber; 
         _mallocSize = cursor - 1 - _charNumber;
-        return _content + cursor - _charNumber;
+        return _content + _size + 1;
+    }
+}
+
+char* TableEntry::deleteChar(int cursor) {
+    /*  If it is the first character just increase +1 the char* otherwise return the rest of the array
+            Receives: (int cursor)
+            Return: (char*) pointer to the char that we left behind
+    */
+    if (cursor == _charNumber) {
+        _content++;
+        _mallocOffset++;
+        _size--;
+        // ajusta-se o mallocSize????
+        return nullptr;
+    } else {
+        _content[cursor - _charNumber] = '\0';
+        _size = cursor - _charNumber; 
+        _mallocSize = cursor - 1 - _charNumber;
+        return _content + _size + 1;
     }
 }
 

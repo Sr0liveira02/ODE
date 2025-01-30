@@ -9,8 +9,7 @@ int main(int argc, char* argv[]) {
 
     Table* table = new Table(argv[1]);
     table->cursorRight(5);
-    table->backSpace();
-    table->backSpace(); 
+    table->deleteChar();
     table->print();
 
     return 0;

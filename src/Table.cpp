@@ -30,6 +30,17 @@ Table::Table(char* path) {
 }
 
 void Table::print() {
+    /*  Prints the cursor position the char it is highlighting and then print the entire file
+            Receives:
+            Return: (char) The char in _cursor
+    */
+    char a = getChar();
+    if (a == '\n')
+        a = 'N';
+    if(a == '\0')
+        a =  'M';
+    std::cout << "Cursor: " << _cursor << " Char: " << a << "\n";
+    std::cout << "Document:\n";
     for(TableEntry* a : _contents) {
         a->print();
     }
