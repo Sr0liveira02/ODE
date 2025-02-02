@@ -10,6 +10,7 @@ class TableEntry {
     char* backSpace(int cursor);
     char* deleteChar(int cursor);
     void print();
+    void charUpdate();
 
     private:
     int _charNumber;

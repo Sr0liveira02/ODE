@@ -29,7 +29,7 @@ class Table {
     int getLineBefore();
 
     int getTableEntry(bool equal);
-    
+    void charNumberUpdate(int i);
     
 };
 

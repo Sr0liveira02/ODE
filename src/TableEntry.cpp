@@ -73,3 +73,7 @@ void TableEntry::print() {
     // std::cout << "CharNumber: " << _charNumber << " Size: " << _size << " | " << _content << "\n";
     std::cout << _content;
 }
+
+void TableEntry::charUpdate() {
+    _charNumber--;
+}
