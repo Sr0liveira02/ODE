@@ -12,7 +12,8 @@ int main(int argc, char* argv[]) {
     table->deleteChar();
     table->backSpace();
     table->backSpace();
-    table->print();
+    table->cursorRight(2);
+    table->printf();
 
     return 0;
 }

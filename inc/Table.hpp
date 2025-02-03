@@ -17,6 +17,7 @@ class Table {
     void backSpace();
     void deleteChar();
     void print();
+    void printf();
 
     private:
     // TODO add a line

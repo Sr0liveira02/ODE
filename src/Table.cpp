@@ -47,6 +47,29 @@ void Table::print() {
     std::cout << "\n";
 }
 
+void Table::printf() {
+    /*  Prints the cursor position the char it is highlighting and then print the entire file
+            Receives:
+            Return: (char) The char in _cursor
+    */
+    char a = getChar();
+    if (a == '\n')
+        a = 'N';
+    if(a == '\0')
+        a =  'M';
+    std::cout << "Cursor: " << _cursor << " Char: " << a << "\n";
+    std::cout << "Document:\n";
+    long unsigned int i = (long unsigned int) getTableEntry(true);
+    for (long unsigned int j = 0; j < i; j++) {
+        _contents[j]->print();
+    }
+    _contents[i]->printf(_cursor);
+    for (long unsigned int j = i+1; j < _contents.size(); j++) {
+        _contents[j]->print();
+    }
+    std::cout << "\n";
+}
+
 int getFileSize(char* path) {
     /*  Open file in append mode and ask how far is the cursor
             Receives: (char* path) path to the file

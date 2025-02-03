@@ -1,5 +1,8 @@
 #include "../inc/ode.hpp"
 
+#define ESC "\033["
+#define RESET "\033[m"
+
 TableEntry::TableEntry(char* content, int charNumber, int size) {
     _content = content;
     _charNumber = charNumber;
@@ -72,6 +75,14 @@ char* TableEntry::deleteChar(int cursor) {
 void TableEntry::print() {
     // std::cout << "CharNumber: " << _charNumber << " Size: " << _size << " | " << _content << "\n";
     std::cout << _content;
+}
+
+void TableEntry::printf(int cursor) {
+    for (int i = 0; i < cursor - _charNumber; i++) {
+        std::cout << _content[i];
+    }
+    std::cout << ESC << ";" << "31" <<"m"<< _content[cursor - _charNumber] << RESET;
+    std::cout << _content + cursor - _charNumber + 1;
 }
 
 void TableEntry::charUpdate() {
