@@ -13,7 +13,7 @@ int main(int argc, char* argv[]) {
     table->backSpace();
     table->backSpace();
     table->cursorRight(2);
-    table->printf();
+    table->print();
 
     return 0;
 }

@@ -73,8 +73,8 @@ char* TableEntry::deleteChar(int cursor) {
 }
 
 void TableEntry::print() {
-    // std::cout << "CharNumber: " << _charNumber << " Size: " << _size << " | " << _content << "\n";
-    std::cout << _content;
+    std::cout << "CharNumber: " << _charNumber << " Size: " << _size << " | " << _content << "\n";
+    // std::cout << _content;
 }
 
 void TableEntry::printf(int cursor) {

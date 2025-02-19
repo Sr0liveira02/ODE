@@ -1,30 +1,34 @@
 #include "../inc/ode.hpp"
 
 void Table::backSpace() {
-    /*  Deletes the character to the left of the cursor
+    /*  Deletes the character to the left of the cursor by splitting the array in the correct position
             Receives:
             Return:
     */
     if (_cursor == 0) {
         return;
     }
+
     int i = getTableEntry(false);
     TableEntry* tableEntry = _contents[i];
 
     int preSize = tableEntry->getSize();
+    // receive the content of the next part of the text if it was separated
     char* nextContent = tableEntry->backSpace(_cursor);
     int posSize = tableEntry->getSize();
-    // if it was the last
+    // update every number of the first char(in the table entry) after the one we spilted
+    charNumberUpdate(i + 1);
+
+    // if it was the last digit in that entry delete it
     if (posSize == 0) {
         _contents.erase(_contents.begin() + i);
-        i--;
         free(tableEntry);
     }
     int newSize = preSize - posSize - 1;
     
+    // update cursor position
     _cursor--;
     if (nextContent == nullptr) {
-        charNumberUpdate(i + 1);
         return;
     } else {
         TableEntry* next = new TableEntry(nextContent, _cursor,newSize);
@@ -41,19 +45,26 @@ void Table::deleteChar() {
     if (_cursor == _fileSize + 1) {
         return;
     }
+
     int i = getTableEntry(true);
     TableEntry* tableEntry = _contents[i];
 
     int preSize = tableEntry->getSize();
+    // receive the content of the next part of the text if it was separated
     char* nextContent = tableEntry->deleteChar(_cursor);
     int posSize = tableEntry->getSize();
-    // if it was the last digit on the Entry
+    // update every entry after the one we spilted
+    charNumberUpdate(i + 1);
+
+    // if it was the last digit in that entry delete it
     if (posSize == 0) {
         _contents.erase(_contents.begin() + i);
         i--;
         free(tableEntry);
     }
-    int newSize = preSize - posSize - 1;    
+
+    int newSize = preSize - posSize - 1;  
+    
     if (nextContent == nullptr) {
         charNumberUpdate(i + 1);
         return;
