@@ -8,11 +8,12 @@ int main(int argc, char* argv[]) {
     }
 
     Table* table = new Table(argv[1]);
-    table->cursorRight(2);
-    table->deleteChar();
+    table->print();
+    table->cursorRight(1);
     table->backSpace();
-    table->backSpace();
-    table->cursorRight(2);
+    table->insertChar('9');
+    table->print();
+    table->insertChar('8');
     table->print();
 
     return 0;

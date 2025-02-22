@@ -59,7 +59,7 @@ int Table::getLineBefore() {
 
 int Table::getTableEntry(bool equal) {
     /*  Loops throw the Table entries trying to find wich one contains the _cursor
-            Receives:
+            Receives: (bool equal) if equal is false it returns the tableEntry of the _cusor -= 1
             Return: (TableEntry* ret) The Table entry that contains the character in teh Cursor
     */
     int ret = -1;
@@ -84,4 +84,27 @@ char Table::getChar() {
             Return: (char) The char in _cursor
     */
     return _contents[getTableEntry(true)]->getChar(_cursor);
+}
+
+void Table::splitOnCursor() {
+    /*  Splits the TableEntry on the cursor and creates a new tableEntry right after
+        Receives:
+        Return: (int) -1 if it did not split 0 otherwise
+    */
+    int i = getTableEntry(false);
+    TableEntry* tableEntry = _contents[i];
+
+    int preSize = tableEntry->getSize();
+    // receive the content of the next part of the text if it was separated
+    char* nextContent = tableEntry->splitContent(_cursor);
+    int posSize = tableEntry->getSize();
+
+    int newSize = preSize - posSize;
+
+    if (nextContent == nullptr) {
+        return;
+    } else {
+        TableEntry* next = new TableEntry(nextContent, _cursor,newSize);
+        _contents.insert(_contents.begin() + i + 1, next);
+    }
 }

@@ -7,11 +7,14 @@ class TableEntry {
     char getChar(int charNumber);
     int getStartingNumber();
     int getSize();
-    char* backSpace(int cursor);
-    char* deleteChar(int cursor);
+    char* splitContent(int cursor);
     void print();
     void printf(int cursor);
-    void charUpdate();
+    void charUpdate(int add);
+    void deleteLastChar();
+    void addChar(char aux);
+    bool isContentFull();
+    void flush();
 
     private:
     int _charNumber;
@@ -19,6 +22,7 @@ class TableEntry {
     int _mallocSize;
     int _mallocOffset;
     char* _content;
+    bool _splited;
     // i should add something like lines maybe a line start and line count and a vector of
 };
 

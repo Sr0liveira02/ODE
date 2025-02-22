@@ -4,6 +4,11 @@
 #include "TableEntry.hpp"
 #include <vector>
 
+// size in chars of how many memory to alloc if a new letter is written in "position"
+#define MID_SETENCE_ALLOC_SIZE 50
+#define END_SETENCE_ALLOC_SIZE 1000
+#define END_FILE_ALLOC_SIZE 2000
+
 class Table {
     public:
     Table(char * path);
@@ -16,6 +21,7 @@ class Table {
     void cursorRightInLine(int collumn);
     void backSpace();
     void deleteChar();
+    void insertChar(char aux);
     void print();
     void printf();
 
@@ -28,9 +34,11 @@ class Table {
     int getLineStart();
     int getNextLine();
     int getLineBefore();
+    void splitOnCursor(); // splits the table entry into 2
+    void createTableEntry(int i);
 
     int getTableEntry(bool equal);
-    void charNumberUpdate(int i);
+    void charNumberUpdate(int i, int add);
     
 };
 

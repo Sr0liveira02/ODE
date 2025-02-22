@@ -80,3 +80,13 @@ int getFileSize(char* path) {
     filesize.close();
     return size;
 }
+
+void Table::charNumberUpdate(int i, int add) {
+    /*  Decreases the size of every Entry after i position by 1
+            Receives:
+            Return:
+    */
+    for (long unsigned int j = i; j < _contents.size(); j++) {
+        _contents[j]->charUpdate(add);
+    }
+}

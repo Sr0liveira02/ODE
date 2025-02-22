@@ -9,6 +9,7 @@ TableEntry::TableEntry(char* content, int charNumber, int size) {
     _mallocSize = size;
     _size = size;
     _mallocOffset = 0;
+    _splited = false;
 }
 
 char TableEntry::getChar(int charNumber) {
@@ -35,41 +36,23 @@ int TableEntry::getSize() {
     return _size;
 }
 
-char* TableEntry::backSpace(int cursor) {
-    /*  If it is the last character just reduce the char* otherwise return the rest of the array
-            Receives: (int cursor)
-            Return: (char*) pointer to the char that we left behind
+void TableEntry::deleteLastChar() {
+    /*  Deletes the last char by putting a \0 on the end
+            Receives:
+            Return:
     */
-    if (cursor == _size + _charNumber) {
-        _content[cursor - _charNumber - 1] = '\0';
-        _size--;
-        // ajusta-se o mallocSize????
-        return nullptr;
-    } else {
-        _content[cursor - _charNumber - 1] = '\0';
-        _size = cursor - 1 - _charNumber; 
-        _mallocSize = cursor - 1 - _charNumber;
-        return _content + _size + 1;
-    }
+    _content[_size - 1] = '\0';
+    _size--;
 }
 
-char* TableEntry::deleteChar(int cursor) {
-    /*  If it is the first character just increase +1 the char* otherwise return the rest of the array
-            Receives: (int cursor)
-            Return: (char*) pointer to the char that we left behind
+void TableEntry::addChar(char aux) {
+    /*  Deletes the last char by putting a \0 on the end
+            Receives:
+            Return:
     */
-    if (cursor == _charNumber) {
-        _content++;
-        _mallocOffset++;
-        _size--;
-        // ajusta-se o mallocSize????
-        return nullptr;
-    } else {
-        _content[cursor - _charNumber] = '\0';
-        _size = cursor - _charNumber; 
-        _mallocSize = cursor - 1 - _charNumber;
-        return _content + _size + 1;
-    }
+    _content[_size] = aux;
+    _content[_size + 1] = '\0';
+    _size++;
 }
 
 void TableEntry::print() {
@@ -85,6 +68,27 @@ void TableEntry::printf(int cursor) {
     std::cout << _content + cursor - _charNumber + 1;
 }
 
-void TableEntry::charUpdate() {
-    _charNumber--;
+void TableEntry::charUpdate(int add) {
+    _charNumber += add;
+}
+
+char* TableEntry::splitContent(int cursor) {
+    if (cursor == _size + _charNumber) {
+        return nullptr;
+    } else {
+        _splited = true;
+        _size = cursor - _charNumber; 
+        _mallocSize = cursor - _charNumber;
+        return _content + _size;
+    }
+}
+
+bool TableEntry::isContentFull() {
+    return _size == _mallocSize - 1;
+}
+
+void TableEntry::flush() {
+    if (!_splited) {
+        free(_content);
+    }
 }
