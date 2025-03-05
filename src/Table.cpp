@@ -2,6 +2,8 @@
 
 #include <fstream>
 
+extern bool debug;
+
 int getFileSize(char* path);
 int getLineBefore();
 
@@ -13,10 +15,9 @@ Table::Table(char* path) {
     // TODO: Solve the problem where the file size is to big
     // Get the content of the file
     std::ifstream file(path, std::ios::in);
-    char* content = (char*) malloc(sizeof(char) * (_fileSize + 2));
+    char* content = (char*) malloc(sizeof(char) * (_fileSize + 1));
     file.read(content, _fileSize);
     content[_fileSize] = '\n';
-    content[_fileSize + 1] = '\0';
     file.close();
 
     // Add it to an entry of the Table
@@ -29,36 +30,18 @@ Table::Table(char* path) {
     _cursor = 0;
 }
 
-void Table::print() {
-    /*  Prints the cursor position the char it is highlighting and then print the entire file
-            Receives:
-            Return: (char) The char in _cursor
-    */
-    char a = getChar();
-    if (a == '\n')
-        a = 'N';
-    if(a == '\0')
-        a =  'M';
-    std::cout << "Cursor: " << _cursor << " Char: " << a << "\n";
-    std::cout << "Document:\n";
-    for(TableEntry* a : _contents) {
-        a->print();
-    }
-    std::cout << "\n";
-}
-
 void Table::printf() {
     /*  Prints the cursor position the char it is highlighting and then print the entire file
             Receives:
             Return: (char) The char in _cursor
     */
-    char a = getChar();
-    if (a == '\n')
-        a = 'N';
-    if(a == '\0')
-        a =  'M';
-    std::cout << "Cursor: " << _cursor << " Char: " << a << "\n";
-    std::cout << "Document:\n";
+    if (debug) {
+        char a = getChar();
+        if (a == '\n')
+            a = 'N';
+        std::cout << "Cursor: " << _cursor << " Char: " << a << "\n";
+        std::cout << "Document:\n";
+    }
     long unsigned int i = (long unsigned int) getTableEntry(true);
     for (long unsigned int j = 0; j < i; j++) {
         _contents[j]->print();

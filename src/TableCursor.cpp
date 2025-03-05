@@ -62,9 +62,9 @@ void Table::cursorRightInLine(int collumn) {
             Return: (int ret) the cursor for position + collumn until '\n'
     */
     for (int j = 0; j < collumn; j++) {
-        _cursor++;
         if (getChar() == '\n') {
             return;
         }
+        _cursor++;
     }
 }

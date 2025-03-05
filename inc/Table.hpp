@@ -22,7 +22,6 @@ class Table {
     void backSpace();
     void deleteChar();
     void insertChar(char aux);
-    void print();
     void printf();
 
     private:

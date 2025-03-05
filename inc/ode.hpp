@@ -2,7 +2,8 @@
 #define ODE_HPP
 
 #include <iostream>
-//#include <string>
+#include <unistd.h>
+#include <string.h>
 
 #include "TableEntry.hpp"
 #include "Table.hpp"

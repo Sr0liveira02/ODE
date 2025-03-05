@@ -4,6 +4,7 @@
 class TableEntry {
     public:
     TableEntry(char * content, int charNumber, int size);
+    TableEntry(char * content, int charNumber, int size, int mallocSize);
     char getChar(int charNumber);
     int getStartingNumber();
     int getSize();

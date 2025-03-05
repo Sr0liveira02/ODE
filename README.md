@@ -5,4 +5,4 @@ This is a project where i develop a text editor(hopefully turn into an IDE)
 
 make (with g++ installed)
 
-./ODE <name_of_file.txt>
+./ODE <file_name>

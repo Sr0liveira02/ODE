@@ -1,12 +1,20 @@
 #include "../inc/ode.hpp"
 
-#define ESC "\033["
-#define RESET "\033[m"
+extern bool debug;
 
 TableEntry::TableEntry(char* content, int charNumber, int size) {
     _content = content;
     _charNumber = charNumber;
     _mallocSize = size;
+    _size = size;
+    _mallocOffset = 0;
+    _splited = false;
+}
+
+TableEntry::TableEntry(char* content, int charNumber, int size, int mallocSize) {
+    _content = content;
+    _charNumber = charNumber;
+    _mallocSize = mallocSize;
     _size = size;
     _mallocOffset = 0;
     _splited = false;
@@ -41,7 +49,6 @@ void TableEntry::deleteLastChar() {
             Receives:
             Return:
     */
-    _content[_size - 1] = '\0';
     _size--;
 }
 
@@ -51,21 +58,30 @@ void TableEntry::addChar(char aux) {
             Return:
     */
     _content[_size] = aux;
-    _content[_size + 1] = '\0';
     _size++;
 }
 
 void TableEntry::print() {
-    std::cout << "CharNumber: " << _charNumber << " Size: " << _size << " | " << _content << "\n";
-    // std::cout << _content;
+    if (debug)
+        std::printf("CharNumber: %d Size: %d | ", _charNumber, _size);
+    std::printf("%.*s", _size, _content);
+    if (debug)
+        std::printf("\n");
 }
 
 void TableEntry::printf(int cursor) {
+    if (debug)
+        std::printf("CharNumber: %d Size: %d | ", _charNumber, _size);
     for (int i = 0; i < cursor - _charNumber; i++) {
-        std::cout << _content[i];
+        std::printf("%.1s", _content + i);
     }
-    std::cout << ESC << ";" << "31" <<"m"<< _content[cursor - _charNumber] << RESET;
-    std::cout << _content + cursor - _charNumber + 1;
+    if (_content[cursor - _charNumber] == '\n')
+        std::printf("\033[;31mN\033[m\n");
+    else
+        std::printf("\033[;31m%c\033[m", _content[cursor - _charNumber]);
+    std::printf("%.*s", _size - cursor + _charNumber - 1, _content + cursor - _charNumber + 1);
+    if (debug)
+        std::printf("\n");
 }
 
 void TableEntry::charUpdate(int add) {
@@ -84,7 +100,7 @@ char* TableEntry::splitContent(int cursor) {
 }
 
 bool TableEntry::isContentFull() {
-    return _size == _mallocSize - 1;
+    return _size == _mallocSize;
 }
 
 void TableEntry::flush() {

@@ -5,15 +5,15 @@ int Table::getLineStart() {
             Receives:
             Return: (int size) the cursor int where the line start is
     */
+    if (_cursor == 0)
+        return 0;
     int temp = _cursor;
     int ret;
     _cursor--;
     while (getChar() != '\n') {
-        if (_cursor == -1) {
+        _cursor--;
+        if (_cursor == -1)
             break;
-        } else {
-            _cursor--;
-        }
     }
     _cursor++;
     ret = _cursor;

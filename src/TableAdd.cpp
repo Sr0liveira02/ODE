@@ -47,14 +47,14 @@ void Table::createTableEntry(int i) {
         _cursor++;
     }
     
-    int _mallocSize;
+    int mallocSize;
     if (lastChar == '\n') {
-        _mallocSize = END_SETENCE_ALLOC_SIZE;
+        mallocSize = END_SETENCE_ALLOC_SIZE;
     } else {
-        _mallocSize = MID_SETENCE_ALLOC_SIZE;
+        mallocSize = MID_SETENCE_ALLOC_SIZE;
     }
-    char* _content = (char*) malloc(_mallocSize * sizeof(char));
+    char* _content = (char*) malloc(mallocSize * sizeof(char));
 
-    TableEntry* next = new TableEntry(_content, _cursor, 0);
+    TableEntry* next = new TableEntry(_content, _cursor, 0, mallocSize);
     _contents.insert(_contents.begin() + i + 1, next);
 }
