@@ -1,7 +1,7 @@
 #include "../inc/ode.hpp"
 
 void Table::backSpace() {
-    /*  Deletes the character to the left of the cursor by splitting the array in the correct position
+    /*  Deletes the character to the left of the cursor by splitting the array in the correct position and then delting it
             Receives:
             Return:
     */

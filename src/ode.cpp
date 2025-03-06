@@ -1,17 +1,10 @@
 #include "../inc/ode.hpp"
 
-bool debug = false;
-
 int main(int argc, char* argv[]) {
     if (argc != 2 && argc != 3) {
         std::cout << "Need at least the 1 arguments!\n";
         std::cout << "./ODE file\n";
         return 0;
-    }
-
-    if (argc == 3) {
-        if (!strcmp(argv[2], "--debug"))
-            debug = true;
     }
 
     Table* table = new Table(argv[1]);

@@ -1,7 +1,5 @@
 #include "../inc/ode.hpp"
 
-extern bool debug;
-
 TableEntry::TableEntry(char* content, int charNumber, int size) {
     _content = content;
     _charNumber = charNumber;
@@ -45,7 +43,7 @@ int TableEntry::getSize() {
 }
 
 void TableEntry::deleteLastChar() {
-    /*  Deletes the last char by putting a \0 on the end
+    /*  Deletes the last char by decreasing the size
             Receives:
             Return:
     */
@@ -53,7 +51,7 @@ void TableEntry::deleteLastChar() {
 }
 
 void TableEntry::addChar(char aux) {
-    /*  Deletes the last char by putting a \0 on the end
+    /*  Adds a new char and increases the size
             Receives:
             Return:
     */
@@ -62,16 +60,27 @@ void TableEntry::addChar(char aux) {
 }
 
 void TableEntry::print() {
-    if (debug)
-        std::printf("CharNumber: %d Size: %d | ", _charNumber, _size);
+    /* Prints the content of this Table Entry
+        Receives:
+        Returns:
+    */
+#if DEBUG
+    std::printf("CharNumber: %d Size: %d | ", _charNumber, _size);
+#endif    
     std::printf("%.*s", _size, _content);
-    if (debug)
-        std::printf("\n");
+#if DEBUG
+    std::printf("\n");
+#endif
 }
 
 void TableEntry::printf(int cursor) {
-    if (debug)
-        std::printf("CharNumber: %d Size: %d | ", _charNumber, _size);
+    /* Prints the content of this TableEntry but if the cursor is in the content it prints it in red
+        Receives: (int cursor) the cursor position
+        Returns:
+    */
+#if DEBUG
+    std::printf("CharNumber: %d Size: %d | ", _charNumber, _size);
+#endif
     for (int i = 0; i < cursor - _charNumber; i++) {
         std::printf("%.1s", _content + i);
     }
@@ -80,15 +89,24 @@ void TableEntry::printf(int cursor) {
     else
         std::printf("\033[;31m%c\033[m", _content[cursor - _charNumber]);
     std::printf("%.*s", _size - cursor + _charNumber - 1, _content + cursor - _charNumber + 1);
-    if (debug)
-        std::printf("\n");
+#if DEBUG
+std::printf("\n");
+#endif
 }
 
 void TableEntry::charUpdate(int add) {
+    /* Updates the _charNumber variable by add
+        Receives: (int add) the value to add
+        Returns:
+    */
     _charNumber += add;
 }
 
 char* TableEntry::splitContent(int cursor) {
+    /* Splits the char* in the cursor and returns the rest of it
+        Receives: (int cursor) the cursor position
+        Returns: (char* content) the content that was left out by the split 
+    */
     if (cursor == _size + _charNumber) {
         return nullptr;
     } else {
@@ -100,10 +118,18 @@ char* TableEntry::splitContent(int cursor) {
 }
 
 bool TableEntry::isContentFull() {
+    /* Checks if content is full
+        Receives:
+        Returns: (bool) if the content char* is full
+    */
     return _size == _mallocSize;
 }
 
 void TableEntry::flush() {
+    /* frees the _content based on if it was spilted before or no
+        Receives:
+        Returns:
+    */
     if (!_splited) {
         free(_content);
     }

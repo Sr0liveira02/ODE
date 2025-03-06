@@ -8,6 +8,7 @@ INCLUDES	= inc/
 
 CXX			= c++
 CXXFLAGS	= -Wall -Wextra -Werror -I$(INCLUDES) -g
+DEBUGFLAG	= -DDEBUG
 RM			= rm -f
 
 all: $(NAME)
@@ -15,6 +16,12 @@ all: $(NAME)
 $(OBJ_PATH)/%.o:%.cpp
 	@mkdir -p $(dir $@)
 	$(CXX) $(CXXFLAGS) -I $(INCLUDES) -I /usr/local/include -c -o $@ $<
+
+$(NAME): $(OBJS)
+	$(CXX) $(CXXFLAGS) -o $@ $^
+
+debug: CXXFLAGS += $(DEBUGFLAG)
+debug: $(NAME)
 
 $(NAME): $(OBJS)
 	$(CXX) $(CXXFLAGS) -o $@ $^

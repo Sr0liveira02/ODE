@@ -1,9 +1,12 @@
 #include "../inc/ode.hpp"
 
 void Table::insertChar(char aux) {
-    /*
-    
+    /* Creates a new entry(if needed) and adds aux char
+        Receives: (char aux)
+        Returns: 
     */
+
+    // create new table entry if needed
     if (_cursor == 0) {
         createTableEntry(-1);
         TableEntry* tableEntry = _contents[0];
@@ -18,6 +21,7 @@ void Table::insertChar(char aux) {
     int i = getTableEntry(false);
     TableEntry* tableEntry = _contents[i];
 
+    // if tableEntry is full create a new one otherwise just write the character 
     if (tableEntry->isContentFull()) {
         createTableEntry(i);
         tableEntry = _contents[i + 1];
@@ -34,8 +38,9 @@ void Table::insertChar(char aux) {
 }
 
 void Table::createTableEntry(int i) {
-    /*
-    
+    /* Creates a new tableEntry with char* of size according to the last character
+        Receives: (int i) index of the TableEntry to be added
+        Returns: 
     */
     // get Last Char
     char lastChar;
@@ -47,6 +52,7 @@ void Table::createTableEntry(int i) {
         _cursor++;
     }
     
+    // create the char* based on last char
     int mallocSize;
     if (lastChar == '\n') {
         mallocSize = END_SETENCE_ALLOC_SIZE;

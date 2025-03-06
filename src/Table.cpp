@@ -2,15 +2,15 @@
 
 #include <fstream>
 
-extern bool debug;
-
 int getFileSize(char* path);
 int getLineBefore();
 
 Table::Table(char* path) {
+    /* Creates a table based on a file by creating 1 entry with all the text
+        Receives: (char* path) path to the file to be edited
+        Returns:
+    */
     _fileSize = getFileSize(path);
-
-    // std::cout << "The file has " << _fileSize << " characters!\n";
 
     // TODO: Solve the problem where the file size is to big
     // Get the content of the file
@@ -31,17 +31,17 @@ Table::Table(char* path) {
 }
 
 void Table::printf() {
-    /*  Prints the cursor position the char it is highlighting and then print the entire file
+    /*  Loops throw every Entry printing the text with the current character highlighted in red
             Receives:
-            Return: (char) The char in _cursor
+            Return:
     */
-    if (debug) {
+#if DEBUG
         char a = getChar();
         if (a == '\n')
             a = 'N';
         std::cout << "Cursor: " << _cursor << " Char: " << a << "\n";
         std::cout << "Document:\n";
-    }
+#endif
     long unsigned int i = (long unsigned int) getTableEntry(true);
     for (long unsigned int j = 0; j < i; j++) {
         _contents[j]->print();
@@ -65,7 +65,7 @@ int getFileSize(char* path) {
 }
 
 void Table::charNumberUpdate(int i, int add) {
-    /*  Decreases the size of every Entry after i position by 1
+    /*  Adds <add> to the size of every Entry after position i
             Receives:
             Return:
     */
