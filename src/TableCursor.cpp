@@ -52,7 +52,7 @@ void Table::cursorRight(int number) {
     if (_cursor + number < _fileSize + 1) {
         _cursor = _cursor + number;
     } else {
-        _cursor = _fileSize + 1; // maybe on file size
+        _cursor = _fileSize;
     }
 }
 

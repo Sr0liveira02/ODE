@@ -33,8 +33,8 @@ void Table::insertChar(char aux) {
     }
     
     // update cursor position
+    _fileSize++;
     _cursor++;
-    
 }
 
 void Table::createTableEntry(int i) {

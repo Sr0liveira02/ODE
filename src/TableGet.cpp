@@ -26,6 +26,9 @@ int Table::getNextLine() {
             Receives:
             Return: (int size) the cursor int where the next line start is
     */
+    if (_cursor == _fileSize) {
+        return -1;
+    }
     int temp = _cursor;
     int ret = -1;
     while (getChar() != '\n') {

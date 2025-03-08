@@ -27,7 +27,7 @@ void Table::backSpace() {
     
     // update cursor position
     _cursor--;
-    
+    _fileSize--;
 }
 
 void Table::deleteChar() {
