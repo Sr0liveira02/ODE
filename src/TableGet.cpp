@@ -10,6 +10,7 @@ int Table::getLineStart() {
     int temp = _cursor;
     int ret;
     _cursor--;
+    
     while (getChar() != '\n') {
         _cursor--;
         if (_cursor == -1)
@@ -51,8 +52,8 @@ int Table::getLineBefore() {
     */
     int temp = _cursor;
     _cursor = getLineStart();
-    if (_cursor - 2 > 0)
-        _cursor = _cursor - 2;
+    if (_cursor - 1 > 0)
+        _cursor = _cursor - 1;
     else
         return -1;
     int ret = getLineStart();

@@ -6,7 +6,7 @@ void Table::cursorUp() {
             Receives:
             Return: 
     */
-    int lineStart =  getLineStart();
+    int lineStart = getLineStart();
     if (lineStart == 0) {
         return;
     }
